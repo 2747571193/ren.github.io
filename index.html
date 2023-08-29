@@ -1,1 +1,258 @@
-hello
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+  <title>首页</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <style>
+    nav ul div {
+      margin-top: 7px;
+      display: inline-block;
+      display: flex;
+      justify-content: center;
+    }
+
+    .banner {
+      background: url("https://p.sda1.dev/12/8bf3df46a2938a08ba4405955e94b66f/banner.png") no-repeat;
+      background-size: 100%;
+      background-position: center;
+      font-weight: 700;
+    }
+
+    .banner img {
+      width: 100%;
+    }
+
+    .banner-text {
+      background: gray;
+      text-align: center;
+      color: #fff;
+      padding: 23% 0;
+      font-size: 50px;
+      line-height: 50px;
+      font-weight: bold;
+      opacity: 0.7;
+    }
+
+    .footer {
+      background-color: black;
+      color: white;
+      margin-top: 20px;
+      padding: 20px 0;
+    }
+
+    .footer ul {
+      list-style-type: none;
+    }
+
+    .modal-backdrop {
+      z-index: 1000;
+    }
+
+    @media (max-width: 600px) {
+      .banner-text {
+        margin-top: 0px;
+        font-size: 34px;
+        padding: 17% 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse navbar-default" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
+          <span class="sr-only">切换导航</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+
+
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">ACGFamily</a>
+      </div>
+      <div class="collapse navbar-collapse" id="example-navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="./index.html">首页</a></li>
+          <li><a href="#">资源</a></li>
+          <li><a href="./new.html">最新消息</a></li>
+          <li><a href="#">相关</a></li>
+          <li>&emsp;</li>
+          <div>
+            <a class="nav-link btn btn-primary text-white" data-toggle="modal" data-target="#register" href="">
+              <span class="glyphicon glyphicon-user"></span>&nbsp;注册
+            </a>&nbsp;
+            <a class="nav-link btn btn-danger text-white" data-toggle="modal" data-target="#login" href="">
+              <span class="glyphicon glyphicon-log-in"></span>&nbsp;登录
+            </a>
+          </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="register" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title text-center" id="myModalLabel">注册</h3>
+        </div>
+        <div class="modal-body">
+          <form id="reg" class="form-group" action="">
+            <div class="form-group">
+              <label for="">用户名</label>
+              <input class="form-control" type="text" placeholder="6-15位字母或数字">
+            </div>
+            <div class="form-group">
+              <label for="">密码</label>
+              <input class="form-control" type="password" placeholder="至少6位字母或数字">
+            </div>
+            <div class="form-group">
+              <label for="">再次输入密码</label>
+              <input class="form-control" type="password" placeholder="至少6位字母或数字">
+            </div>
+            <div class="form-group">
+              <label for="">邮箱</label>
+              <input class="form-control" type="email" placeholder="例如:123@123.com">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('reg').submit()">提交</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <div class="text-left">
+            <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="login" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h3 class="modal-title text-center" id="myModalLabel">登录</h3>
+        </div>
+        <div class="modal-body">
+          <form id="log" class="form-group" action="">
+            <div class="form-group">
+              <label for="">用户名</label>
+              <input class="form-control" type="text" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="">密码</label>
+              <input class="form-control" type="password" placeholder="">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('log').submit()">登录</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+          <div class="text-left">
+            <a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">还没有账号？点我注册</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row col-md-12">
+      <div class="banner">
+        <div class="banner-text">你好,欢迎来到这里</div>
+      </div>
+    </div>
+  </div>
+
+  <article>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h2>ACG简介</h2>
+          <p>
+            &emsp;&emsp;ACG是Anime(动画),Comics(漫画),Games(游戏)的缩写。<br />
+            &emsp;&emsp;该词最早由台湾的爱好者AIplus所提出并应用于台湾中山大学BBS站的动漫板块的命名。随后这个词语传入香港和中国大陆。<br />
+            &emsp;&emsp;通常,ACG一词特指日本的动画、漫画、游戏产业,这三类作品载体经常互相改编,可以说是ACG本是一家。<br />
+            &emsp;&emsp;在2015年左右二次元行业变得大众化,经过社会各领域传播后,解释为与Animations(所有动画)、Comics(所有漫画)、Games(所有游戏)相关的项目事件,也和广义上的“二次元”基本划为等号。
+          </p>
+          <p><a target="_blank" class="btn btn-default" href="https://zh.moegirl.org.cn/ACG" role="button">阅读更多
+              &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>ACG一词的产生原理</h2>
+          <p>
+            &emsp;&emsp;在日本ACG传入中国以前,中国大陆少有这三者合称的观念,最多将动画和漫画(如儿童读物《西游记》等的电视动画和漫画“小人书”)结合。<br />
+            &emsp;&emsp;由于当时狭义的ACG核心为作品中有魅力的人物形象,故日本ACG产业以人物形象为卖点的作品也随之增加,剧情的还原度可以不那么高,因此有条件并推动其覆盖受众视听的各领域,首先是对同一作品开发动画、漫画与游戏,随后与受众扩展至开发大量的视听作品、周边产品和展会活动。这个过程中A、C、G逐步实现高度融合,这种合称的观念也逐步传入、影响中国。这种融合是ACG本质一家的原因,也是其独特之处。
+          </p>
+          <p><a target="_blank" class="btn btn-default" href="https://zh.moegirl.org.cn/ACG" role="button">阅读更多
+              &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>ACG概念的扩展</h2>
+          <p>
+            <strong>ACGN</strong>:21世纪10年代以来,由于互相改编的作品载体类型的扩展,ACG一词也有涵盖领域的趋势,比如轻小说。故有将轻小说(Light
+            Novels)以缩写“N”添加到ACG中而诞生的新缩写词“ACGN”。<br />
+            <strong>ACGMN与ACGMN+</strong>:在ACGN中加入音乐(Music)即得ACGMN一词,由动画和游戏配乐衍生而来。加入更多衍生物得ACGMN+。<br />
+            <strong>ACG次文化</strong>:也称“ACG亚文化”。ACG次文化的载体,除了最初的A、C、G这三类最为人熟悉的形式之外,还包括其他众多的视听作品载体形式。故ACG这个缩写往往泛指所有的ACG作品载体,或者整个ACG文化圈和ACG产业。
+          </p>
+          <p><a target="_blank" class="btn btn-default" href="https://zh.moegirl.org.cn/ACG" role="button">阅读更多
+              &raquo;</a></p>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </article>
+
+  <article>
+
+  </article>
+  </div>
+
+  <footer class="footer col-md-12">
+    <div class="col-md-2"></div>
+    <div class="col-md-3">
+      <ul>
+        <!-- 仅贴一下，没发过贴子或代码 -->
+        <h3>我的</h3>
+        <li>github: <a href="https://github.com/2747571193">姓任的人</a></li>
+        <li>码云：<a href="https://gitee.com/name_ren">姓任的人</a></li>
+        <li>CSDN: <a href="https://blog.csdn.net/m0_56117660?spm=1000.2115.3001.5343">姓任的人</a></li>
+      </ul>
+    </div>
+    <div class="col-md-3">
+      <ul>
+        <!-- 仅贴一下，没发过贴子或代码 -->
+        <h3>联系我</h3>
+        <li>B站: <a href="https://space.bilibili.com/122963670">姓任的人</a></li>
+      </ul>
+    </div>
+    <div class="col-md-3">
+      <ul>
+        <h3>了解更多</h3>
+        <li><a href="https://baike.baidu.com/item/acg/33795">百度百科</a></li>
+        <li><a href="https://zh.moegirl.org.cn/ACG">萌娘百科</a></li>
+        <li><a href="https://www.zhihu.com/topic/20004246/intro">知乎百科</a></li>
+      </ul>
+    </div>
+    </section>
+  </footer>
+
+  <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+  <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+  <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
