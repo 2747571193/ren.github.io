@@ -144,7 +144,7 @@
             if (row === -1 && col === -1) {
                 row = Math.floor((mazeMap.length - 1) / 2);    // Math.floor向下取整用于
                 col = Math.floor((mazeMap[0].length - 1) / 2); // 处理数组长度为偶数的情况
-                maze[row][col] = 3;
+                mazeMap[row][col] = 3;
             }
             const m = document.createElement("div");
             m.id = "mouse";
