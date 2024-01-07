@@ -1,258 +1,317 @@
-<!doctype html>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-  <title>首页</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迷宫游戏</title>
+    <style>
+        body {
+            margin: 100px auto;
+        }
+        #maze {
+            /*定义为网格容器*/
+            display: grid;
+            /* 栅格化 repeat(x,y)作用为y重复x次，此处在js中定义*/
+            grid-template-rows: auto;
+            /* grid-template-columns: repeat(7, 40px); */
+            /* width: 200px; */
 
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
+            margin: 40px auto;
+            /*父元素相对定位*/
+            position: relative;
+        }
 
-  <style>
-    nav ul div {
-      margin-top: 7px;
-      display: inline-block;
-      display: flex;
-      justify-content: center;
-    }
+        /* 老鼠 */
+        #mouse {
+            width: 40px;
+            height: 40px;
+            background-color: #fff;
+            background-image: url(mouse.jpg);
+            background-size: 100% 100%;
+            /*子元素绝对定位，使元素悬浮*/
+            position: absolute;
+        }
 
-    .banner {
-      background: url("https://p.sda1.dev/12/8bf3df46a2938a08ba4405955e94b66f/banner.png") no-repeat;
-      background-size: 100%;
-      background-position: center;
-      font-weight: 700;
-    }
+        /* 功能列 */
+        #funList {
+            width: 265px;
+            height: 70px;
+            margin: 0px auto;
+        }
 
-    .banner img {
-      width: 100%;
-    }
+        #time {
+            width: 80px;
+            height: 30px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 28px;
+            margin: 5px auto;
+            color: red;
+        }
 
-    .banner-text {
-      background: gray;
-      text-align: center;
-      color: #fff;
-      padding: 23% 0;
-      font-size: 50px;
-      line-height: 50px;
-      font-weight: bold;
-      opacity: 0.7;
-    }
+        /* 默认为路 */
+        .road {
+            width: 40px;
+            height: 40px;
+            background-color: antiquewhite;
+        }
 
-    .footer {
-      background-color: black;
-      color: white;
-      margin-top: 20px;
-      padding: 20px 0;
-    }
+        /* 粮仓 */
+        #granary {
+            background-color: #0f0;
+        }
 
-    .footer ul {
-      list-style-type: none;
-    }
-
-    .modal-backdrop {
-      z-index: 1000;
-    }
-
-    @media (max-width: 600px) {
-      .banner-text {
-        margin-top: 0px;
-        font-size: 34px;
-        padding: 17% 0;
-      }
-    }
-  </style>
+        .wall {
+            background-color: black;
+        }
+    </style>
 </head>
 
 <body>
-  <nav class="navbar navbar-inverse navbar-default" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#example-navbar-collapse">
-          <span class="sr-only">切换导航</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-
-
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">ACGFamily</a>
-      </div>
-      <div class="collapse navbar-collapse" id="example-navbar-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="./index.html">首页</a></li>
-          <li><a href="#">资源</a></li>
-          <li><a href="#">最新消息</a></li>
-          <li><a href="#">相关</a></li>
-          <li>&emsp;</li>
-          <div>
-            <a class="nav-link btn btn-primary text-white" data-toggle="modal" data-target="#register" href="">
-              <span class="glyphicon glyphicon-user"></span>&nbsp;注册
-            </a>&nbsp;
-            <a class="nav-link btn btn-danger text-white" data-toggle="modal" data-target="#login" href="">
-              <span class="glyphicon glyphicon-log-in"></span>&nbsp;登录
-            </a>
-          </div>
-        </ul>
-      </div>
+    <h1 style="text-align: center;">迷宫游戏</h1>
+    <div id="funList">
+        <button id="startGame" onclick="startGame(this)">开始游戏</button>
+        <button onclick="changeMap(this)">修改地图</button>
+        <button onclick="findRoad()">提示</button>
+        <button onclick="mapOut()">导出地图</button>
+        <div style="margin: 5px 0;">
+            <label for="file">点击导入地图</label>
+            <input style="width: 160px;" id="file" type="file" value="导入地图" onchange="mapIn(this.files)" />
+        </div>
+        <div id="time">时间</div>
     </div>
-  </nav>
-
-  <div id="register" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h3 class="modal-title text-center" id="myModalLabel">注册</h3>
-        </div>
-        <div class="modal-body">
-          <form id="reg" class="form-group" action="">
-            <div class="form-group">
-              <label for="">用户名</label>
-              <input class="form-control" type="text" placeholder="6-15位字母或数字">
-            </div>
-            <div class="form-group">
-              <label for="">密码</label>
-              <input class="form-control" type="password" placeholder="至少6位字母或数字">
-            </div>
-            <div class="form-group">
-              <label for="">再次输入密码</label>
-              <input class="form-control" type="password" placeholder="至少6位字母或数字">
-            </div>
-            <div class="form-group">
-              <label for="">邮箱</label>
-              <input class="form-control" type="email" placeholder="例如:123@123.com">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="document.getElementById('reg').submit()">提交</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-          <div class="text-left">
-            <a href="" data-toggle="modal" data-dismiss="modal" data-target="#login">已有账号？点我登录</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="login" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h3 class="modal-title text-center" id="myModalLabel">登录</h3>
-        </div>
-        <div class="modal-body">
-          <form id="log" class="form-group" action="">
-            <div class="form-group">
-              <label for="">用户名</label>
-              <input class="form-control" type="text" placeholder="">
-            </div>
-            <div class="form-group">
-              <label for="">密码</label>
-              <input class="form-control" type="password" placeholder="">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" onclick="document.getElementById('log').submit()">登录</button>
-          <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-          <div class="text-left">
-            <a href="" data-toggle="modal" data-dismiss="modal" data-target="#register">还没有账号？点我注册</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="row col-md-12">
-      <div class="banner">
-        <div class="banner-text">你好,欢迎来到这里</div>
-      </div>
-    </div>
-  </div>
-
-  <article>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <h2>ACG简介</h2>
-          <p>
-            &emsp;&emsp;ACG是Anime(动画),Comics(漫画),Games(游戏)的缩写。<br />
-            &emsp;&emsp;该词最早由台湾的爱好者AIplus所提出并应用于台湾中山大学BBS站的动漫板块的命名。随后这个词语传入香港和中国大陆。<br />
-            &emsp;&emsp;通常,ACG一词特指日本的动画、漫画、游戏产业,这三类作品载体经常互相改编,可以说是ACG本是一家。<br />
-            &emsp;&emsp;在2015年左右二次元行业变得大众化,经过社会各领域传播后,解释为与Animations(所有动画)、Comics(所有漫画)、Games(所有游戏)相关的项目事件,也和广义上的“二次元”基本划为等号。
-          </p>
-          <p><a target="_blank" class="btn btn-default" href="https://zh.moegirl.org.cn/ACG" role="button">阅读更多
-              &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>ACG一词的产生原理</h2>
-          <p>
-            &emsp;&emsp;在日本ACG传入中国以前,中国大陆少有这三者合称的观念,最多将动画和漫画(如儿童读物《西游记》等的电视动画和漫画“小人书”)结合。<br />
-            &emsp;&emsp;由于当时狭义的ACG核心为作品中有魅力的人物形象,故日本ACG产业以人物形象为卖点的作品也随之增加,剧情的还原度可以不那么高,因此有条件并推动其覆盖受众视听的各领域,首先是对同一作品开发动画、漫画与游戏,随后与受众扩展至开发大量的视听作品、周边产品和展会活动。这个过程中A、C、G逐步实现高度融合,这种合称的观念也逐步传入、影响中国。这种融合是ACG本质一家的原因,也是其独特之处。
-          </p>
-          <p><a target="_blank" class="btn btn-default" href="https://zh.moegirl.org.cn/ACG" role="button">阅读更多
-              &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>ACG概念的扩展</h2>
-          <p>
-            <strong>ACGN</strong>:21世纪10年代以来,由于互相改编的作品载体类型的扩展,ACG一词也有涵盖领域的趋势,比如轻小说。故有将轻小说(Light
-            Novels)以缩写“N”添加到ACG中而诞生的新缩写词“ACGN”。<br />
-            <strong>ACGMN与ACGMN+</strong>:在ACGN中加入音乐(Music)即得ACGMN一词,由动画和游戏配乐衍生而来。加入更多衍生物得ACGMN+。<br />
-            <strong>ACG次文化</strong>:也称“ACG亚文化”。ACG次文化的载体,除了最初的A、C、G这三类最为人熟悉的形式之外,还包括其他众多的视听作品载体形式。故ACG这个缩写往往泛指所有的ACG作品载体,或者整个ACG文化圈和ACG产业。
-          </p>
-          <p><a target="_blank" class="btn btn-default" href="https://zh.moegirl.org.cn/ACG" role="button">阅读更多
-              &raquo;</a></p>
-        </div>
-      </div>
-    </div>
+    <div id="maze">
     </div>
 
-  </article>
+    <script>
+        // 迷宫地图，0路，1墙，2粮仓，3老鼠。无老鼠默认生成在中间，谷仓默认在右下角
+        let mazeMap = [
+            [0, 0, 0, 0, 0, 0, 0],
+            [0, 1, 1, 1, 0, 1, 0],
+            [0, 0, 0, 0, 1, 1, 0],
+            [0, 1, 0, 1, 0, 1, 0],
+            [0, 0, 1, 0, 1, 0, 2],
+        ];
+        const maxTime = 50;  //秒
 
-  <article>
+        // 初始化迷宫
+        const maze = document.getElementById("maze");
+        function initMaze() {
+            maze.innerHTML = "";
+            maze.style.gridTemplateColumns = "repeat(" + mazeMap[0].length + ", 40px)";
+            maze.style.width = mazeMap[0].length * 40 + "px";
+            let mflag = 0, gflag = 0;
+            for (let i = 0; i < mazeMap.length; i++) {
+                for (let j = 0; j < mazeMap[i].length; j++) {
+                    const road = document.createElement("div");
+                    road.className = "road";
+                    if (mazeMap[i][j] === 2) {
+                        road.id = "granary";
+                        gflag++;
+                    } else if (mazeMap[i][j] === 1) {
+                        road.classList.add("wall");
+                    } else if (mazeMap[i][j] === 3) {
+                        initMouse(i, j)
+                        mflag++;
+                    }
+                    if (i === mazeMap.length - 1 && j === mazeMap[i].length - 1 && gflag === 0) {
+                        road.id = "granary"
+                        mazeMap[i][j] = 2;
+                    }
 
-  </article>
-  </div>
+                    road.setAttribute("row", i);
+                    road.setAttribute("col", j);
+                    maze.appendChild(road);
+                }
+            }
+            if (mflag === 0) initMouse(-1, -1)
+            else if (mflag >= 2) {
+                alert("地图中包括多个老鼠，重新导入！");
+                maze.innerHTML = "";
+                return false;
+            }
+            if (gflag >= 2) {
+                alert("地图中包括多个谷仓，重新导入！");
+                maze.innerHTML = "";
+                return false;
+            }
+            changeWallAndRoad();
+            return true;
+        }
 
-  <footer class="footer col-md-12">
-    <div class="col-md-2"></div>
-    <div class="col-md-3">
-      <ul>
-        <!-- 仅贴一下，没发过贴子或代码 -->
-        <h3>我的</h3>
-        <li>github: <a href="https://github.com/rjcren">姓任的人</a></li>
-        <li>码云：<a href="https://gitee.com/name_ren">姓任的人</a></li>
-        <li>CSDN: <a href="https://blog.csdn.net/m0_56117660?spm=1000.2115.3001.5343">姓任的人</a></li>
-      </ul>
-    </div>
-    <div class="col-md-3">
-      <ul>
-        <!-- 仅贴一下，没发过贴子或代码 -->
-        <h3>联系我</h3>
-        <li>B站: <a href="https://space.bilibili.com/122963670">姓任的人</a></li>
-      </ul>
-    </div>
-    <div class="col-md-3">
-      <ul>
-        <h3>了解更多</h3>
-        <li><a href="https://baike.baidu.com/item/acg/33795">百度百科</a></li>
-        <li><a href="https://zh.moegirl.org.cn/ACG">萌娘百科</a></li>
-        <li><a href="https://www.zhihu.com/topic/20004246/intro">知乎百科</a></li>
-      </ul>
-    </div>
-    </section>
-  </footer>
+        // 老鼠初始化
+        function initMouse(row, col) {
+            if (row === -1 && col === -1) {
+                row = Math.floor((mazeMap.length - 1) / 2);    // Math.floor向下取整用于
+                col = Math.floor((mazeMap[0].length - 1) / 2); // 处理数组长度为偶数的情况
+                maze[row][col] = 3;
+            }
+            const m = document.createElement("div");
+            m.id = "mouse";
+            maze.appendChild(m);
+            const mouse = document.getElementById("mouse");
+            mouse.setAttribute("row", row);
+            mouse.setAttribute("col", col);
+            mouse.style.top = row * 40 + "px";
+            mouse.style.left = col * 40 + "px";
+        }
 
-  <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
-  <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        let timer = null, isStart = false;
+        const timeEle = document.getElementById("time");
+        function startGame(sg) {
+            isStart = !isStart;
+            if (isStart) {
+                if (!initMaze()) {
+                    isStart = !isStart;
+                    return;
+                }
+                sg.innerHTML = "终止游戏";
+                timerShow();
+            }
+            else {
+                sg.innerHTML = "开始游戏";
+                clearInterval(timer);
+                maze.innerHTML = "";
+                timeEle.innerHTML = "时间";
+            }
+        }
+        function timerShow() {
+            if (isNaN(parseInt(timeEle.innerText)))
+                timeEle.innerHTML = maxTime;
+            timer = setInterval(function () {
+                let now = parseInt(timeEle.innerText);
+                if (now > 0 && now <= maxTime) {
+                    timeEle.innerHTML = --now;
+                } else if (time <= 0) {
+                    timeEle.innerHTML = "时间到";
+                    alert("时间到！")
+                    sg.innerHTML = "重新开始";
+                    clearInterval(timer);
+                    isStart = false;
+                }
+            }, 1000);
+        }
+
+        // 路变墙墙变路
+        let isChangeWall = false;
+        function changeMap(btn) {
+            if (!isStart) {
+                alert("游戏未开始，不可修改地图！");
+                return;
+            }
+            isChangeWall = !isChangeWall;
+            if (isChangeWall) {
+                alert("开始修改地图！点击地图即可");
+                btn.innerHTML = "停止修改";
+                clearInterval(timer);
+            }
+            else {
+                alert("修改地图结束！");
+                btn.innerHTML = "修改地图";
+                timerShow();
+            }
+        }
+        function changeWallAndRoad() {
+            const roads = document.getElementsByClassName("road");
+            for (const road of roads)
+                road.onclick = function () {
+                    let row = parseInt(this.getAttribute("row"));
+                    let col = parseInt(this.getAttribute("col"));
+                    if (!isChangeWall) return;
+                    if (this.classList.contains("wall")) {
+                        this.classList.remove("wall");
+                        mazeMap[row][col] = 0;
+                    }
+                    else {
+                        this.classList.add("wall");
+                        mazeMap[row][col] = 1;
+                    }
+                }
+        }
+
+        // 控制老鼠移动
+        document.onkeydown = function (e) {
+            if (isChangeWall) {
+                alert("修改地图中，不可移动！");
+                return;
+            }
+            if (!isStart) return;
+            // 必须使用parseInt转换为整型，否则可能会有问题（破bug找我一个多小时）
+            row = parseInt(mouse.getAttribute("row"));
+            col = parseInt(mouse.getAttribute("col"));
+            switch (e.keyCode) {
+                case 87:     // w 上移
+                    if (row >= 1 && mazeMap[--row][col] != 1) {
+                        mouse.style.top = (row) * 40 + "px";
+                        mouse.setAttribute("row", row);
+                    }
+                    break;
+                case 65:     // a 左移
+                    if (col >= 1 && mazeMap[row][--col] != 1) {
+                        mouse.style.left = (col) * 40 + "px";
+                        mouse.setAttribute("col", col);
+                    }
+                    break;
+                case 83:     // s 下移
+                    if (row < mazeMap.length - 1 && mazeMap[row + 1][col] != 1) {
+                        mouse.style.top = (row + 1) * 40 + "px";
+                        mouse.setAttribute("row", ++row);
+                    }
+                    break;
+                case 68:     // d 右移
+                    if (col < mazeMap[0].length - 1 && mazeMap[row][col + 1] != 1) {
+                        mouse.style.left = (col + 1) * 40 + "px";
+                        mouse.setAttribute("col", ++col);
+                    }
+                    break;
+            }
+            if (row === mazeMap.length - 1 && col === mazeMap[0].length - 1) {
+                alert("恭喜成功！");
+                clearInterval(timer); //清除计时器
+                timeEle.innerHTML = "成功";
+                document.getElementById("startGame").innerHTML = "重新开始";
+                isStart = false;
+            }
+        }
+
+        // 地图导入导出
+        function mapIn(files) {
+            if (files.length) {
+                let file = files[0];
+                let fr = new FileReader();
+                fr.onload = function () {
+                    // JSON.parse()将将数据转换为JS对象
+                    mazeMap = JSON.parse(this.result);
+                }
+                fr.readAsText(file);
+            }
+        }
+        function mapOut() {
+            // data表示要转换的字符串数据，type表示要转换的数据格式
+            // JSON.stringify()将JS对象或值转换为JSON字符串
+            const blob = new Blob([JSON.stringify(mazeMap)], {
+                type: "text/plain;charset=utf-8"
+            });
+            // 根据 blob生成 url链接
+            const objectURL = URL.createObjectURL(blob);
+            // 创建一个 a 标签Tag
+            const aTag = document.createElement('a');
+            // 设置文件的下载地址
+            aTag.href = objectURL;
+            // 设置保存后的文件名称
+            aTag.download = "迷宫地图.txt"
+            // 给 a 标签添加点击事件
+            aTag.click();
+            // 释放一个之前已经存在的、通过调用 URL.createObjectURL() 创建的 URL 对象。
+            // 当结束使用某个URL对象，调用方法让浏览器不继续保留对文件的引用了。
+            URL.revokeObjectURL(objectURL);
+        }
+
+        function findRoad() {
+
+        }
+
+    </script>
 </body>
-
 </html>
