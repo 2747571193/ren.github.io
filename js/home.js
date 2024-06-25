@@ -1,5 +1,5 @@
 let images = document.querySelectorAll('#banner .img3');
-let indicatorImages = document.querySelectorAll('#banner .banner img');
+let indicatorDiv = document.querySelectorAll('#banner .banner div');
 let banner_index = 1;
 let totalImages = images.length;
 let timer;
@@ -24,13 +24,13 @@ function changeImage(index) {
     startAutoSlide();
 }
 function updateIndicators(current) {
-    indicatorImages.forEach(function (img, i) {
+    indicatorDiv.forEach(function (div, i) {
         if (i + 1 === current) {
-            img.src = './img/home/block_red.png';
+            div.classList.add("select");
         } else {
-            img.src = './img/home/block_white.png';
+            div.classList.remove("select");
         }
-        img.onclick = () => {
+        div.onclick = () => {
             banner_index = i + 1;
             changeImage(banner_index);
         };

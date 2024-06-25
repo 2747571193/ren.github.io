@@ -93,14 +93,26 @@ body {
   width: 1300px;
   margin: 0 auto;
 }
-.img4 {
+.point {
+  display: inline-block;
   width: 14px;
+  height: 14px;
+  border-radius: 50%;
   position: relative;
   top: -35px;
   left: 630px;
   margin: 0 4px;
   cursor: pointer;
+  background-color: white;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
+.select {
+  background-color: red;
+}
+
 #content {
   width: 1300px;
   margin: 0 auto;
