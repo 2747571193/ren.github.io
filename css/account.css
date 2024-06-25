@@ -1,0 +1,164 @@
+
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	background: #ebf3ee;
+	zoom: 0.9;    /* 让页面打开时自动打开为比例 */
+}
+#top{
+	width: 100%;
+	background: #ebebeb;
+}
+.top{
+	height: 30px;
+	font-size: 8px;
+	line-height: 30px;
+	background: #ebebeb;
+	width: 1300px;
+	margin: 0 auto;
+}
+.top div{
+	background: #0f8f3c;
+	color: white;
+	display: inline-block;
+	height: 23px;
+	width: 70px;
+	text-align: center;
+	line-height: 23px;
+	position: relative;
+	left: 980px;
+}
+.top p{
+	display: inline-block;
+}
+#nav{
+	height: 100px;
+	width: 100%;
+	height: 100px;
+	padding-bottom:10px;
+	background:white;
+}
+.nav{
+	height: 100px;
+	width: 1300px;
+	margin: 0 auto;
+}
+.img1{
+	height: 100px;
+	position: relative;
+	top: 10px;
+	left: -15px;
+}
+.img2{
+	height: 80px;
+	position: relative;
+	left: 360px;
+}
+#nav ul,li{
+	color: #0f8f3c;
+	font-size: 20px;
+	display: inline-block;
+	position: relative;
+	top: -15px;
+	left: 80px;
+}
+#nav ul a {
+	margin: 0 10px;
+	display: inline-block;
+}
+
+#contect{
+	width: 100%;
+	height: 800px;
+	min-width: 800px;
+	overflow:hidden;
+	background-image: url(../img/account/bgimg.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.contect1{
+	float: left;
+	width: 100%;
+	height: 100%;
+	background:white;
+	opacity: 0.5;
+}
+.login-container {
+	margin: 200px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.login-container .login-form {
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-container .input-group {
+    margin-bottom: 15px;
+}
+
+.login-container .input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.login-container .input-group input {
+    width: 80%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+	margin: 10px 0;
+}
+
+.login-container button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.login-container button:hover {
+    background-color: #0056b3;
+}
+.login-container h2, .login-container p {
+	margin-top: 15px;
+}
+
+.login-container a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-container a:hover {
+    text-decoration: underline;
+}
+#footer{
+	width:100%;
+	height:100px;
+	line-height:30px;
+	background:white;
+	padding-top:20px;
+	padding-bottom:30px;
+}
+.footer{
+	text-align:center;
+	width: 1300px;
+	margin: 0 auto;
+}

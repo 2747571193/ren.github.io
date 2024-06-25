@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="./css/ticket.css">
+</head>
+
+<body>
+	<div id="top">
+		<div class="top">
+			<P>你好，欢迎来到古城之都邯郸！</P>
+			<div>设为首页</div>
+			<div>加入收藏</div>
+		</div>
+	</div>
+	<div id="nav">
+		<div class="nav">
+			<img src="./img/logo.png" class="img1" />
+			<ul>
+				<a href="home.html">
+					<li>首页</li>
+				</a>
+				<a href="travel.html">
+					<li>旅游</li>
+				</a>
+				<a href="food.html">
+					<li>美食</li>
+				</a>
+				<a href="ticket.html">
+					<li>购票</li>
+				</a>
+				<a href="contact.html">
+					<li>联系我们</li>
+				</a>
+				<a href="#">
+					<li>最新动态</li>
+				</a>
+			</ul>
+			<!-- <img src="./img/logo2.png" class="img2" /> -->
+			<a href="index.html"><img src="./img/account.png" class="account"></a>
+		</div>
+	</div>
+	<div id="banner">
+		<img src="./img/travel/img-1.jpg" class="img3" />
+	</div>
+	<div id="contect">
+		<div class="spacing"></div>
+		<div class="contect1">
+			<div class="div1">购票</div>
+			<div class="div2"><img src="./img/arrow.jpg" />&nbsp;购票 </div>
+		</div>
+		<div class="contect2">
+			<div class="div1">首页 > 购票</div>
+			<div class="div2">
+				<div class="ticketSystem">
+					<h1>欢迎来到景区购票系统</h1>
+					<form name="orderForm" id="orderForm" action="#">
+						<h3>请选择购票景点</h3>
+						<label>
+							<input type="radio" name="ticketAttractions" value="wuliang">
+							武灵丛台
+						</label>
+						<label>
+							<input type="radio" name="ticketAttractions" value="xiangtangshan">
+							响堂山石窟
+						</label>
+						<label>
+							<input type="radio" name="ticketAttractions" value="jingniang">
+							京娘湖
+						</label>
+						<label>
+							<input type="radio" name="ticketAttractions" value="wudang">
+							古武当山
+						</label>
+						<label>
+							<input type="radio" name="ticketAttractions" value="wohuanggong">
+							娲皇宫
+						</label>
+						<label>
+							<input type="radio" name="ticketAttractions" value="handangucheng">
+							赵邯郸故城
+						</label>
+						<label>
+							<input type="radio" name="ticketAttractions" value="zhaowangling">
+							赵王陵
+						</label>
+						<label>
+							<input type="radio" name="ticketAttractions" value="yechengsite">
+							邺城遗址
+						</label>
+
+						<h3>请选择门票类型：</h3>
+						<label>
+							<input type="radio" name="ticketType" value="adult">
+							成人票 - ￥60
+						</label>
+						<label>
+							<input type="radio" name="ticketType" value="senior">
+							老年票 - ￥30
+						</label>
+						<label>
+							<input type="radio" name="ticketType" value="child">
+							儿童票 - ￥30
+						</label>
+						<label>
+							<input type="radio" name="ticketType" value="student">
+							学生票 - ￥30
+						</label><br />
+						<h3 style="display: inline-block;">数量：</h3>
+						<input type="button" id="decrease" value=" - " />
+						<span id="quantity">1</span>
+						<input type="button" id="increase" value=" + " />
+						<h3>游客信息：</h3>
+						<label for="name">姓&emsp;&emsp;名：<input type="text" name="name" id="name"></label><br>
+						<label for="idNumber">
+							身份证号：<input type="text" name="idNumber" id="idNumber">
+						</label><br>
+						<div id="message"></div>
+						<h2>
+							<input type="button" class="operationButton" id="addTicket" value="继续添加" />
+							<input type="button" class="operationButton" id="reset" value="重置" />
+							<input type="button" class="operationButton" id="submit" value="提交订单" />
+						</h2>
+					</form>
+				</div>
+				<div class="ticketInfo">
+					<h2>购票须知</h2>
+					<div>
+						【开放时间】08:30~17:00<br>
+						【入园凭证】<br>
+						请您凭辅助码和有效证件，至景区检票处换取门票或者自助扫描刷码入园，请妥善保存凭证，丢失无法补发<br>
+						【优惠政策】<br>
+						(一) 半价适用对象<br>
+						&emsp;&emsp;1、身高1.2米（含1.2米-1.5米）(含1.5米儿童)<br>
+						&emsp;&emsp;2、全日制本科及以下学生凭学生证<br>
+						&emsp;&emsp;3、60周岁一69周岁老人凭本人有效证件(身份证)<br>
+						&emsp;&emsp;4、烈士遗属、因公栖牲军人遗属凭相关证明文件<br>
+						(二) 免票适用对象<br>
+						&emsp;&emsp;1、身高1.2米以下儿童<br>
+						&emsp;&emsp;2、70周岁以上老年人凭本人有效证件（身份证）<br>
+						&emsp;&emsp;3、新闻记者凭国家新闻出版总署颁发的记者证<br>
+						&emsp;&emsp;4、现役军人凭军官证或士兵证，退役军人和烈士遗属、因公栖牲军人遗属、病故军人遗属凭优待证<br>
+						&emsp;&emsp;5、离休干部、全国道德模范和省部级以上劳动模范凭相关证件<br>
+						&emsp;&emsp;6、残疾人(残疾证)；重度残疾人允许一名陪护人员免费进入<br>
+						&emsp;&emsp;7、旅行社经理、导游、司机（凭派团单和经理证、导游证、驾驶证<br>
+						（以上优惠票种以景区公告为准）<br>
+						【退改说明】<br>
+						(1) 最晚于游玩日期当天23:55前可申请退款，逾期无法退款，不支持部分退款。退款无需支付手续费。<br>
+						(2) 本产品一经预订，不支持改期。<br>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="contect3">
+			<div class="div1">联系方式</div>
+			<div class="div2">
+				地址：河北石油职业技术大学<br />
+				联系人：任巨晨<br />
+				电话：15832352701<br />
+				QQ：2747571193<br />
+				网站：www.hdtravel.com<br />
+				邮编：067000
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="footer">
+			<p><b>首页&emsp;|&emsp;旅游&emsp;|&emsp;美食&emsp;|&emsp;留言&emsp;|&emsp;关于我们</b></p>
+			<p>网站维护：任巨晨&emsp;联系方式：rjcren@qq.com</p>
+			<p>Copyright 2020-2024 All Rights Reserved 版权所有 冀 ICP xxxxxx号</p>
+		</div>
+	</div>
+	<script src="./js/ticket.js"></script>
+</body>
+
+</html>

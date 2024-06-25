@@ -1,0 +1,209 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+body {
+  background: #ebf3ee;
+  zoom: 0.9;    /* 让页面打开时自动打开为比例 */
+}
+#top {
+  width: 100%;
+  background: #ebebeb;
+}
+.top {
+  height: 30px;
+  font-size: 8px;
+  line-height: 30px;
+  background: #ebebeb;
+  width: 1300px;
+  margin: 0 auto;
+}
+.top div {
+  background: #0f8f3c;
+  color: white;
+  display: inline-block;
+  height: 23px;
+  width: 70px;
+  text-align: center;
+  line-height: 23px;
+  position: relative;
+  left: 980px;
+}
+.top p {
+  display: inline-block;
+}
+#nav {
+  height: 100px;
+  width: 100%;
+  height: 100px;
+  padding-bottom: 10px;
+  background: white;
+}
+.nav {
+  height: 100px;
+  width: 1300px;
+  margin: 0 auto;
+}
+.img1 {
+  height: 100px;
+  position: relative;
+  top: 10px;
+  left: -15px;
+}
+.img2 {
+  height: 80px;
+  position: relative;
+  left: 360px;
+}
+.account {
+  height: 50px;
+  position: relative;
+  left: 360px;
+  top: -15px;
+  cursor: pointer;
+}
+#nav ul,
+#nav li {
+  color: #0f8f3c;
+  font-size: 20px;
+  display: inline-block;
+  position: relative;
+  top: -15px;
+  left: 80px;
+}
+#nav ul a {
+  margin: 0 10px;
+  display: inline-block;
+}
+#banner {
+  width: 100%;
+  min-width: 1400px;
+  height: 521px;
+  margin: 0 auto 10px;
+}
+.img3 {
+  width: 100%;
+  height: 500px;
+  display: none;
+}
+#banner .img3.active {
+  display: block;
+}
+.banner {
+  width: 1300px;
+  margin: 0 auto;
+}
+.img4 {
+  width: 14px;
+  position: relative;
+  top: -35px;
+  left: 630px;
+  margin: 0 4px;
+  cursor: pointer;
+}
+#content {
+  width: 1300px;
+  margin: 0 auto;
+}
+#content h2 {
+  text-align: center;
+  color: green;
+  margin-bottom: 10px;
+}
+.arrow {
+  position: relative;
+  top: 6px;
+  left: 600px;
+}
+#content hr {
+  border: 2px solid green;
+  margin-bottom: 20px;
+}
+.content1 {
+  width: 1300px;
+  margin: 0 auto;
+}
+.img5 {
+  width: 360px;
+}
+.content1 div {
+  width: 370px;
+  background: white;
+  border: 1px solid #beccc3;
+  padding: 15px;
+  display: inline-block;
+  overflow: hidden;
+}
+.content1 .div1 {
+  margin-right: 40px;
+}
+.content1 .div2 {
+  float: right;
+}
+.content1 h3 {
+  padding-top: 25px;
+  padding-bottom: 5px;
+  text-align: center;
+}
+.content1 p {
+  line-height: 30px;
+}
+.content2 {
+  width: 1250px;
+  background: white;
+  margin: 0 auto;
+  padding: 65px 0 20px 50px;
+}
+.content2 div {
+  display: inline-block;
+  padding-right: 65px;
+}
+.content2 img {
+  width: 135px;
+}
+.content2 p {
+  color: green;
+  line-height: 30px;
+  text-align: center;
+}
+.content3 {
+  width: 1300px;
+  margin: 30px auto 50px;
+}
+.content3 img {
+  display: inline-block;
+}
+.content3 span {
+  display: inline-block;
+  width: 1222px;
+  height: 200px;
+  overflow: hidden;
+  white-space: nowrap; /*不换行*/
+  position: relative;
+}
+.img6 {
+  width: 300px;
+  height: 196px;
+  margin: 0 1px;
+  position: absolute;
+  transition: left 0.1s;
+}
+.img7 {
+  width: 31px;
+  position: relative;
+  top: -60px;
+  cursor: pointer;
+}
+#footer {
+  width: 100%;
+  height: 100px;
+  line-height: 30px;
+  background: white;
+  padding-top: 20px;
+  padding-bottom: 30px;
+}
+.footer {
+  text-align: center;
+  width: 1300px;
+  margin: 0 auto;
+}
